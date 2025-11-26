@@ -3,7 +3,10 @@
 #include <cstring>
 #include <climits>
 #include <algorithm>
+#include <functional>
 #include <vector>
+#include <set>
+#include <map>
 
 typedef long long int64;
 
