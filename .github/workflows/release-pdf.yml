@@ -17,7 +17,7 @@ jobs:
       - name: Combine Files
         run: |
           OUTPUT="full_documentation.md"
-          echo "# Project Documentation Summary" > "$OUTPUT"
+          echo "# Templates" > "$OUTPUT"
           
           # 获取所有前缀并过滤掉输出文件本身
           PREFIXES=$(ls | grep -E "\.(cpp|hpp|md)$" | grep -v "^$OUTPUT" | sed 's/\.[^.]*$//' | sort -u)
@@ -33,7 +33,7 @@ jobs:
             
             # 2. CPP
             if [ -f "$p.cpp" ]; then
-              echo "#### $p.cpp" >> "$OUTPUT"
+              echo "### $p.cpp" >> "$OUTPUT"
               echo '```cpp' >> "$OUTPUT"
               cat "$p.cpp" >> "$OUTPUT"
               echo -e '\n```\n' >> "$OUTPUT"
@@ -41,29 +41,31 @@ jobs:
             
             # 3. HPP
             if [ -f "$p.hpp" ]; then
-              echo "#### $p.hpp" >> "$OUTPUT"
+              echo "### $p.hpp" >> "$OUTPUT"
               echo '```cpp' >> "$OUTPUT"
               cat "$p.hpp" >> "$OUTPUT"
               echo -e '\n```\n' >> "$OUTPUT"
             fi
           done
 
-      # 步骤 2: 使用官方 Pandoc 镜像进行转换
-      # 这种格式直接调用 Docker Hub 镜像，不依赖 GitHub Action 仓库
-      - name: Convert MD to PDF
-        uses: docker://pandoc/latex:latest
-        with:
-          args: >-
-            full_documentation.md
-            -o project_docs.pdf
-            --pdf-engine=xelatex
-            -V CJKmainfont="DejaVu Sans"
+      - name: Install Pandoc and Fonts
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc texlive-xetex fonts-noto-cjk
 
-      # 步骤 3: 发布 Release
-      # 这个 Action 由 GitHub 官方维护，极度稳定
+      - name: Run Pandoc Local
+        run: |
+          pandoc full_documentation.md \
+            -o template.pdf \
+            --pdf-engine=xelatex \
+            -V CJKmainfont="Noto Sans CJK SC" \
+            -V geometry:margin=1.5cm \
+            -V fontsize=10pt \
+            --highlight-style pygments
+
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
-          files: project_docs.pdf
+          files: template.pdf
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
