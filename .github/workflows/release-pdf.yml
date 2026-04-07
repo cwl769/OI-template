@@ -49,17 +49,20 @@ jobs:
             fi
           done
 
+      # 步骤 2: 使用官方 Pandoc 镜像进行转换
+      # 这种格式直接调用 Docker Hub 镜像，不依赖 GitHub Action 仓库
       - name: Convert MD to PDF
-        uses: rishabhgupta/pandoc-action@v2
+        uses: docker://pandoc/latex:latest
         with:
-          # 注意：这里使用了 xelatex 和 Noto 字体来支持中文
           args: >-
-            --output=project_docs.pdf 
-            full_documentation.md 
-            --pdf-engine=xelatex 
-            -V CJKmainfont="Noto Sans CJK SC"
+            full_documentation.md
+            -o project_docs.pdf
+            --pdf-engine=xelatex
+            -V CJKmainfont="DejaVu Sans"
 
-      - name: Upload Release
+      # 步骤 3: 发布 Release
+      # 这个 Action 由 GitHub 官方维护，极度稳定
+      - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
           files: project_docs.pdf
