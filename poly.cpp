@@ -249,36 +249,3 @@ public:
         return stream;
     }
 };
-
-char str[1000010];
-
-int main() {
-    PolyMod<998244353, 3> a, b;
-    scanf("%s", str);
-    int n = strlen(str);
-    for(int i=n-1;i>=0;--i) {
-        a.v.push_back(str[i] - '0');
-    }
-    scanf("%s", str);
-    n = strlen(str);
-    for(int i=n-1;i>=0;--i) {
-        b.v.push_back(str[i] - '0');
-    }
-    // std::cout << a << b << std::endl;
-    PolyMod<998244353, 3> c = a * b;
-    std::vector<int> ans;
-    int rest=0;
-    for(int i=0;i<(int)c.v.size();++i) {
-        int x = rest + c.v[i].val();
-        ans.push_back(x%10);
-        rest = x / 10;
-    }
-    if(rest)
-        printf("%d", rest);
-    for(auto it=ans.rbegin();it!=ans.rend();++it) {
-        printf("%d", *it);
-    }
-    printf("\n");
-
-    return 0;
-}
