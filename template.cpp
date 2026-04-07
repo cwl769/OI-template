@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <cstring>
 #include <climits>
+#include <cmath>
 #include <algorithm>
 #include <functional>
 #include <vector>
@@ -9,6 +10,7 @@
 #include <map>
 
 typedef long long int64;
+typedef std::vector<int> vector;
 
 template<typename T>
 void readInt(T& x) {
