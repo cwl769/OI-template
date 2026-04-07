@@ -24,7 +24,6 @@ jobs:
           
           for p in $PREFIXES; do
             echo "Processing prefix: $p"
-            echo -e "\n---\n# Module: $p\n" >> "$OUTPUT"
             
             # 1. Markdown
             if [ -f "$p.md" ] && [ "$p.md" != "$OUTPUT" ]; then
