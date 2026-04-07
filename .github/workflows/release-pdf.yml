@@ -1,0 +1,67 @@
+name: Generate PDF and Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Combine Files
+        run: |
+          OUTPUT="full_documentation.md"
+          echo "# Project Documentation Summary" > "$OUTPUT"
+          
+          # 获取所有前缀并过滤掉输出文件本身
+          PREFIXES=$(ls | grep -E "\.(cpp|hpp|md)$" | grep -v "^$OUTPUT" | sed 's/\.[^.]*$//' | sort -u)
+          
+          for p in $PREFIXES; do
+            echo "Processing prefix: $p"
+            echo -e "\n---\n# Module: $p\n" >> "$OUTPUT"
+            
+            # 1. Markdown
+            if [ -f "$p.md" ] && [ "$p.md" != "$OUTPUT" ]; then
+              cat "$p.md" >> "$OUTPUT"
+              echo -e "\n" >> "$OUTPUT"
+            fi
+            
+            # 2. CPP
+            if [ -f "$p.cpp" ]; then
+              echo "#### $p.cpp" >> "$OUTPUT"
+              echo '```cpp' >> "$OUTPUT"
+              cat "$p.cpp" >> "$OUTPUT"
+              echo -e '\n```\n' >> "$OUTPUT"
+            fi
+            
+            # 3. HPP
+            if [ -f "$p.hpp" ]; then
+              echo "#### $p.hpp" >> "$OUTPUT"
+              echo '```cpp' >> "$OUTPUT"
+              cat "$p.hpp" >> "$OUTPUT"
+              echo -e '\n```\n' >> "$OUTPUT"
+            fi
+          done
+
+      - name: Convert MD to PDF
+        uses: rishabhgupta/pandoc-action@v2
+        with:
+          # 注意：这里使用了 xelatex 和 Noto 字体来支持中文
+          args: >-
+            --output=project_docs.pdf 
+            full_documentation.md 
+            --pdf-engine=xelatex 
+            -V CJKmainfont="Noto Sans CJK SC"
+
+      - name: Upload Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: project_docs.pdf
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
