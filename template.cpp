@@ -9,8 +9,13 @@
 #include <set>
 #include <map>
 
+#define itn int
 typedef long long int64;
-typedef std::vector<int> vector;
+typedef long long i64;
+typedef std::vector<int> veci;
+typedef std::vector<i64> veci64;
+
+#define debug(...) fprintf(stderr, __VA_ARGS__)
 
 template<typename T>
 void readInt(T& x) {
@@ -29,8 +34,16 @@ void readInt(T& x, Args&... args) {
     readInt(args...);
 }
 
-int main() {
+void solve() {
+
     
+}
+
+int main() {
+    int T;readInt(T);
+    while(T--) {
+        solve();
+    }
 
     return 0;
 }
