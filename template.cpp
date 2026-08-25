@@ -8,12 +8,15 @@
 #include <vector>
 #include <set>
 #include <map>
+#include <queue>
+#include <stack>
 
 #define itn int
 typedef long long int64;
 typedef long long i64;
 typedef std::vector<int> veci;
 typedef std::vector<i64> veci64;
+typedef std::pair<int, int> PII;
 
 #define debug(...) fprintf(stderr, __VA_ARGS__)
 
@@ -36,7 +39,6 @@ void readInt(T& x, Args&... args) {
 
 void solve() {
 
-    
 }
 
 int main() {
