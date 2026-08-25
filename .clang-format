@@ -1,0 +1,38 @@
+# C++ formatting rules:
+#   1. Opening brace stays on the same line (not alone on a line).
+#   2. Remove unnecessary whitespace.
+#   3. Two-space indentation.
+#   4. Keep single-line if / loop statements on one line.
+Language: Cpp
+BasedOnStyle: LLVM
+
+# --- Indentation: two spaces ---
+IndentWidth: 2
+TabWidth: 2
+UseTab: Never
+ContinuationIndentWidth: 2
+
+# --- Brace placement: opening brace never on its own line ---
+BreakBeforeBraces: Attach
+
+# --- Keep short if / loop statements on a single line ---
+AllowShortIfStatementsOnASingleLine: WithoutElse
+AllowShortLoopsOnASingleLine: true
+
+# --- Also merge short braced blocks: if (x) { y++; } ---
+AllowShortBlocksOnASingleLine: Always
+
+# --- Automatic line wrapping: break lines that exceed 72 columns.
+#     (ColumnLimit must stay finite, otherwise clang-format disables the
+#     AllowShortIf/AllowShortLoops single-line merging.) ---
+ColumnLimit: 72
+
+# --- Remove unnecessary spaces ---
+PointerAlignment: Left
+ReferenceAlignment: Left
+SpaceBeforeParens: ControlStatements
+SpacesInParentheses: false
+SpacesInSquareBrackets: false
+SpacesInAngles: Never
+SpacesInCStyleCastParentheses: false
+SpacesBeforeTrailingComments: 1
