@@ -1,15 +1,3 @@
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
-#include <algorithm>
-#include <vector>
-#include <map>
-#include <cassert>
-typedef long long i64;
-typedef std::vector<int> veci;
-typedef std::vector<i64> veci64;
-typedef std::pair<int, int> PII;
- 
 int tot = -1;
 struct SAM {
     struct Node {

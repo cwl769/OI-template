@@ -1,13 +1,3 @@
-#include <cstdio>
-#include <cmath>
-#include <cstring>
-#include <vector>
-#include <complex>
-#include <iostream>
-
-typedef long long i64;
-typedef unsigned long long ui64;
-
 int log2(int x) {
     int ans = -1;
     for(;x;x>>=1)++ans;
@@ -205,14 +195,3 @@ public:
         return stream;
     }
 };
-
-int main() {
-    int n;scanf("%d", &n);
-    PolyMod<998244353, 3> f;
-    for(int i=0;i<n;++i) {
-        int x;scanf("%d", &x);
-        f.v.emplace_back(x);
-    }
-    std::cout << f.inv(n) << std::endl;
-    return 0;
-}

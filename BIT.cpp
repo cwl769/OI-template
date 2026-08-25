@@ -1,5 +1,3 @@
-#include <cstdlib>
-
 struct BIT {
     int *c;
     int N;

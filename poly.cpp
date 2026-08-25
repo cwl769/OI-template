@@ -1,20 +1,9 @@
-#include <cstdio>
-#include <cmath>
-#include <cstring>
-#include <vector>
-#include <complex>
-#include <iostream>
-
-typedef long long i64;
-typedef unsigned long long ui64;
 const double pi = acos(-1);
-
 int log2(int x) {
     int ans = -1;
     for(;x;x>>=1)++ans;
     return ans;
 }
-
 std::vector<std::complex<double> > FFT(std::vector<std::complex<double> > a, int len) {
     // std::vector<std::complex<double> > ans;
     len = (1<<(log2(len-1)+1));

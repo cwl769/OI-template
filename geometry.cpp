@@ -1,8 +1,3 @@
-#include <cstdio>
-#include <algorithm>
-#include <vector>
-typedef long long i64;
- 
 struct vector {
     i64 x, y;
     vector() : x(), y() {}
