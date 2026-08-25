@@ -25,7 +25,7 @@ AllowShortBlocksOnASingleLine: Always
 # --- Automatic line wrapping: break lines that exceed 72 columns.
 #     (ColumnLimit must stay finite, otherwise clang-format disables the
 #     AllowShortIf/AllowShortLoops single-line merging.) ---
-ColumnLimit: 72
+ColumnLimit: 60
 
 # --- Remove unnecessary spaces ---
 PointerAlignment: Left
