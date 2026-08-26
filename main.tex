@@ -199,8 +199,6 @@
 
 %THE SCL BEGINS
 \begin{document}
-
-	% ==================== 双栏正文 + 目录 ====================
 	\begin{multicols}{2}
 		\setcounter{tocdepth}{3}
 		\begingroup
@@ -217,7 +215,7 @@
 			% ============================================================
 			% 在这里添加你的内容。三种内容类型：
 			%
-			% 1) 代码：源码独立存放在 src/src/<分类>/ 下，用 \inputminted 引入：
+			% 1) 代码：用 \inputminted 引入：
 			%      \section{分类名}
 			%        \subsection{算法名}
 			%          \inputminted{cpp}{src/src/example/example.cpp}
@@ -232,6 +230,9 @@
 			%      在 .cpp 注释里直接写 // $O(n^2)$ 即可被渲染成数学式
 			% ============================================================
 
+			\section{Tips}
+				\input{./tips.tex}
+
 			\section{Data Structure}
 				\subsection{树状数组}
 					\inputminted{cpp}{./BIT.cpp}
@@ -243,6 +244,8 @@
 					\inputminted{cpp}{./poly.cpp}
 				\subsection{模多项式(NTT)}
 					\inputminted{cpp}{./polyMod.cpp}
+				\subsection{插值}
+					\input{./interp.tex}
 			
 			\section{String}
 				\subsection{SAM 后缀自动机}
