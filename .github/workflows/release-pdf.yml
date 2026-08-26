@@ -21,7 +21,7 @@ jobs:
         run: |
           sudo apt-get update
           # 安装 XeLaTeX 及其常用宏包和中文支持
-          sudo apt-get install -y texlive-xetex texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra texlive-lang-chinese
+          sudo apt-get install -y texlive-xetex texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra texlive-lang-chinese texlive-lang-greek
           
           # 安装所需字体：
           # - fonts-noto-cjk / fonts-noto-cjk-extra: 提供 Noto CJK (Sans, Serif, Mono 的 SC 版本)
