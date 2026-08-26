@@ -17,27 +17,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install XeLaTeX and Open Source Fonts
+      - name: Install XeLaTeX and Fonts
         run: |
           sudo apt-get update
           # 安装 XeLaTeX 及其常用宏包和中文支持
           sudo apt-get install -y texlive-xetex texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra texlive-lang-chinese
           
-          # 安装 Noto CJK (包含 Sans, Serif, Mono 的 SC 版本) 和 Linux Libertine O
-          sudo apt-get install -y fonts-noto-cjk fonts-noto-cjk-extra fonts-linuxlibertine
-
-      - name: Install Consolas Font
-        run: |
-          # Consolas 是微软版权字体，无法通过 apt 直接安装。
-          # 这里通过公开的 GitHub 备份仓库下载 ttf 文件并安装到系统字体目录。
-          mkdir -p ~/.local/share/fonts/Consolas
-          wget -qO ~/.local/share/fonts/Consolas/consola.ttf https://github.com/matthewjberger/consolas-font/raw/master/CONSOLA.TTF
-          wget -qO ~/.local/share/fonts/Consolas/consolab.ttf https://github.com/matthewjberger/consolas-font/raw/master/CONSOLAB.TTF
-          wget -qO ~/.local/share/fonts/Consolas/consolai.ttf https://github.com/matthewjberger/consolas-font/raw/master/CONSOLAI.TTF
-          wget -qO ~/.local/share/fonts/Consolas/consolaz.ttf https://github.com/matthewjberger/consolas-font/raw/master/CONSOLAZ.TTF
-          
-          # 刷新系统字体缓存
-          fc-cache -fv ~/.local/share/fonts/
+          # 安装所需字体：
+          # - fonts-noto-cjk / fonts-noto-cjk-extra: 提供 Noto CJK (Sans, Serif, Mono 的 SC 版本)
+          # - fonts-linuxlibertine: 提供 Linux Libertine O
+          # - fonts-jetbrains-mono: 提供 JetBrains Mono
+          sudo apt-get install -y fonts-noto-cjk fonts-noto-cjk-extra fonts-linuxlibertine fonts-jetbrains-mono
 
       - name: Make build script executable
         run: chmod +x build.sh
@@ -48,7 +38,6 @@ jobs:
       - name: Publish Release
         uses: softprops/action-gh-release@v2
         with:
-          # 请将这里的 output.pdf 替换为 build.sh 实际生成的文件路径或名称
           files: |
             main.pdf
           generate_release_notes: true
