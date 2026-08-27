@@ -5,11 +5,11 @@
         f(x) = \sum_{i=1}^{n}y_i\prod_{j\neq i}\frac{x - x_j}{x_i - x_j}
     $
 
-    暴力处理 $O(n)$, 
+    暴力处理 $O(n^2)$, 可用多项式优化
+
+    $x_i$ 取连续整数时可优化至 $O(n)$
 
     \newcolumn
     Newton
-
-
 
 \end{multicols}
