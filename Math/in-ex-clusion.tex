@@ -1,0 +1,22 @@
+集合反演(一般化容斥)
+
+若 $f(S) = \sum_{T\subseteq S}g(T)$
+则 $g(S) = \sum_{T\subseteq S}(-1)^{|S|-|T|}f(T)$
+
+若 $f(S) = \sum_{S\subseteq T}g(T)$
+则 $g(S) = \sum_{S\subseteq T}(-1)^{|T|-|S|}f(T)$
+
+Min-Max容斥:
+$x$是长度为$n$的数列, $S,T$是包含$1, 2, \cdots, n$的集合
+
+$\mathrm{kthmax}_{i\in S}x_i=\sum_{T\subseteq S}(-1)^{|T|-k}\binom{|T|-1}{k-1}\mathrm{min}_{j\in T}x_j$
+
+$\mathrm{kthmin}_{i\in S}x_i=\sum_{T\subseteq S}(-1)^{|T|-k}\binom{|T|-1}{k-1}\mathrm{max}_{j\in T}x_j$
+
+$E(\mathrm{kthmax}_{i\in S}x_i)=\sum_{T\subseteq S}(-1)^{|T|-k}\binom{|T|-1}{k-1}E(\mathrm{min}_{j\in T}x_j)$
+
+$E(\mathrm{kthmin}_{i\in S}x_i)=\sum_{T\subseteq S}(-1)^{|T|-k}\binom{|T|-1}{k-1}E(\mathrm{max}_{j\in T}x_j)$
+
+$k$从$1$开始,即最大是$1stmax$.
+
+$E(\mathrm{min}_{j\in T}x_j)$可以理解为$\sum_{y}P(y=x)\cdot \mathrm{min}_{j\in T}x_j$其中y是长度为n的数列.其余几个期望类推.
