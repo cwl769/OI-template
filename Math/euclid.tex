@@ -1,0 +1,17 @@
+解决$\sum_{i=1}^{n} \lfloor \frac{ai+b}{c} \rfloor$或相关的问题
+
+\inputminted{cpp}{Math/euclid.cpp}
+
+可以设计状态$(x, y, x^2, xy, y^2, \cdots, \sum x, \sum y, \sum x^2, \sum xy, \sum y^2, \cdots)$
+
+无求和的部分可以先合并两个一次项$x$, $y$,剩余部分合并时将$x$或$y$次数减一后递推得到;
+有求和部分使用下列式子转移
+$$
+\sum_{S_1+S_2}x^r y^s = \sum{S_1}x^r y^s + 
+\sum_{i=0}^{r}\sum_{j=0}^{s}\binom{r}{i}\binom{s}{j}x_1^{r-i}y_1^{s-j}\sum_{S_2}x^i y^j
+$$
+注意$\sum_{S_2}1$应当是$x_2$，因为我们在每个R处统计答案
+
+下面是一个用于求$\sum y$的幺半群实现
+
+\inputminted{cpp}{Math/euclid_monoid.cpp}
