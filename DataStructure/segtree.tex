@@ -1,4 +1,9 @@
 \subsubsection{Concepts}
 \inputminted{cpp}{DataStructure/segtree_concept.cpp}
-\subsubsection{区间修改单点查询}
+\subsubsection{单点修改区间查询}
+需要信息构成(么)半群, 实现\texttt{merge}函数, 默认构造函数需为幺元.
 \inputminted{cpp}{DataStructure/segtree_simple.cpp}
+\subsubsection{区间修改}
+满足前一个的前提下, 还需要一个半群构成对信息的作用.
+作用需要实现\texttt{Data.act(Action, int, int)}函数
+以及\texttt{Action.compose(Action)}函数.
