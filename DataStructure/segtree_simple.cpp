@@ -17,8 +17,7 @@ int chg(int p, coord l, coord r, coord pos, Data val) {
   if(pos<=mid)pl[p].son[0]=chg(pl[p].son[0],l,mid,pos,val);
   else pl[p].son[1]=chg(pl[p].son[1], mid+1, r, pos, val);
   pushup(p);return p;
-}
-void chg(coord pos, Data val){root=chg(root,L,R,pos,val);}
+}void chg(coord pos, Data val){root=chg(root,L,R,pos,val);}
 // When data is "Addable", the following 2 func exist.
 template <typename Delta> requires Addable<Data, Delta>
 int add(int p, coord l, coord r, coord pos, Delta dd) {
@@ -27,8 +26,7 @@ int add(int p, coord l, coord r, coord pos, Delta dd) {
   if(pos<=mid)pl[p].son[0]=add(pl[p].son[0],l,mid,pos,dd);
   else pl[p].son[1]=add(pl[p].son[1], mid+1, r, pos, dd);
   pushup(p);return p;
-}
-template <typename Delta> requires Addable<Data, Delta>
+}template <typename Delta> requires Addable<Data, Delta>
 void add(coord pos, Delta dd){root=add(root,L,R,pos,dd);}
 Data query(int p, coord l, coord r, coord ql, coord qr) {
   coord mid = l + r >> 1; if (!p) return pl[0].data;
@@ -37,6 +35,5 @@ Data query(int p, coord l, coord r, coord ql, coord qr) {
   if(ql > mid)return query(pl[p].son[1], mid+1, r, ql,qr);
   return merge(query(pl[p].son[0], l, mid, ql, qr),
                 query(pl[p].son[1], mid + 1, r, ql, qr));
-}
-Data query(coord l, coord r) {return query(root,L,R,l,r);}
+}Data query(coord l, coord r) {return query(root,L,R,l,r);}
 };

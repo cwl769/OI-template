@@ -29,8 +29,7 @@ int chg(int p, coord l, coord r, coord pos, Data val) {
   if(pos<=mid)pl[p].son[0]=chg(pl[p].son[0],l,mid,pos,val);
   else pl[p].son[1]=chg(pl[p].son[1], mid+1, r, pos, val);
   pushup(p);return p;
-}
-void chg(coord pos, Data val){root=chg(root,L,R,pos,val);}
+}void chg(coord pos, Data val){root=chg(root,L,R,pos,val);}
 int act(int p,coord l,coord r,coord ql,coord qr,Act dd){
   if(!p) p = newNode();coord mid = l + r >> 1;
   if(ql <= l && r <= qr) { pl[p].data.act(dd, l, r);
@@ -40,8 +39,7 @@ int act(int p,coord l,coord r,coord ql,coord qr,Act dd){
   if(qr > mid) pl[p].son[1] =
       act(pl[p].son[1], mid + 1, r, ql, qr, dd);
   pushup(p);return p;
-}
-void act(coord l,coord r,Act d){root=act(root,L,R,l,r,d);}
+}void act(coord l,coord r,Act d){root=act(root,L,R,l,r,d);}
 Data query(int p, coord l, coord r, coord ql, coord qr) {
   coord mid = l + r >> 1;if(!p) return pl[0].data;
   if(ql<=l&&r<=qr){return pl[p].data;}pushdown(p, l, r);
