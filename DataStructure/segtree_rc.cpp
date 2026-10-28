@@ -23,17 +23,25 @@ void pushdown(int p, coord l, coord r) {
   pl[pl[p].son[1]].tag.compose(pl[p].tag);
   pl[p].tag = Act();
 }
-int chg(int p,coord l,coord r,coord ql,coord qr,Act dd){
+int chg(int p, coord l, coord r, coord pos, Data val) {
+  coord mid = l + r >> 1; if (!p) p = newNode();
+  if(l == r) {pl[p].data = val;return p;}
+  if(pos<=mid)pl[p].son[0]=chg(pl[p].son[0],l,mid,pos,val);
+  else pl[p].son[1]=chg(pl[p].son[1], mid+1, r, pos, val);
+  pushup(p);return p;
+}
+void chg(coord pos, Data val){root=chg(root,L,R,pos,val);}
+int act(int p,coord l,coord r,coord ql,coord qr,Act dd){
   if(!p) p = newNode();coord mid = l + r >> 1;
   if(ql <= l && r <= qr) { pl[p].data.act(dd, l, r);
     pl[p].tag.compose(dd);return p;} pushdown(p, l, r);
   if(ql <= mid) pl[p].son[0] =
-      chg(pl[p].son[0], l, mid, ql, qr, dd);
+      act(pl[p].son[0], l, mid, ql, qr, dd);
   if(qr > mid) pl[p].son[1] =
-      chg(pl[p].son[1], mid + 1, r, ql, qr, dd);
+      act(pl[p].son[1], mid + 1, r, ql, qr, dd);
   pushup(p);return p;
 }
-void chg(coord l,coord r,Act d){root=chg(root,L,R,l,r,d);}
+void act(coord l,coord r,Act d){root=act(root,L,R,l,r,d);}
 Data query(int p, coord l, coord r, coord ql, coord qr) {
   coord mid = l + r >> 1;if(!p) return pl[0].data;
   if(ql<=l&&r<=qr){return pl[p].data;}pushdown(p, l, r);
