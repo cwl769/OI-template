@@ -3,6 +3,7 @@
 #include <cstring>
 #include <climits>
 #include <cmath>
+#include <iostream>
 #include <algorithm>
 #include <functional>
 #include <vector>
@@ -38,14 +39,13 @@ void readInt(T& x, Args&... args) {
 }
 
 void solve() {
-
+    
 }
 
 int main() {
     int T;readInt(T);
-    while(T--) {
+    while(T--)
         solve();
-    }
 
     return 0;
 }
