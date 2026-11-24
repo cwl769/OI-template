@@ -4,6 +4,7 @@
 #include <climits>
 #include <cmath>
 #include <iostream>
+#include <string>
 #include <algorithm>
 #include <functional>
 #include <vector>
@@ -18,6 +19,8 @@ typedef long long i64;
 typedef std::vector<int> veci;
 typedef std::vector<i64> veci64;
 typedef std::pair<int, int> PII;
+using std::cin;
+using std::cout;
 
 #define debug(...) fprintf(stderr, __VA_ARGS__)
 
